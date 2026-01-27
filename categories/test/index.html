@@ -906,6 +906,7 @@
         position: absolute;
         inset: 0;
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
         pointer-events: auto;
@@ -916,6 +917,41 @@
     .opening-video__overlay--hidden {
         opacity: 0;
         pointer-events: none;
+    }
+
+     
+    .opening-video__welcome-text {
+        color: #2ac3f2;
+        font-size: 70px;
+        font-weight: bold;
+        text-shadow: 
+            0 0 10px rgba(255, 255, 255, 0.8),
+            0 0 20px rgba(255, 255, 255, 0.6),
+            0 0 30px rgba(255, 255, 255, 0.4);
+        margin-bottom: 140px;
+        opacity: 1;
+        transition: opacity 0.4s ease, transform 0.4s ease;
+        animation: welcomeTextGlow 2s ease-in-out infinite alternate;
+    }
+
+    .opening-video__welcome-text--hidden {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    @keyframes welcomeTextGlow {
+        0% {
+            text-shadow: 
+                0 0 10px rgba(255, 255, 255, 0.8),
+                0 0 20px rgba(255, 255, 255, 0.6),
+                0 0 30px rgba(255, 255, 255, 0.4);
+        }
+        100% {
+            text-shadow: 
+                0 0 15px rgba(255, 255, 255, 1),
+                0 0 25px rgba(255, 255, 255, 0.8),
+                0 0 35px rgba(255, 255, 255, 0.6);
+        }
     }
 
     .opening-video__play-btn {
@@ -1022,6 +1058,7 @@
         playsinline
     ></video>
     <div id="opening-play-overlay" class="opening-video__overlay">
+        <div id="opening-welcome-text" class="opening-video__welcome-text">欢迎来到我的博客</div>
         <button
             type="button"
             class="opening-video__play-btn"
@@ -1044,6 +1081,7 @@
         var video = container.querySelector('video');
         var overlay = document.getElementById('opening-play-overlay');
         var playBtn = overlay ? overlay.querySelector('button') : null;
+        var welcomeText = document.getElementById('opening-welcome-text');
         if (!video) return;
 
         function hide() {
@@ -1069,6 +1107,9 @@
             video.play().then(function () {
                 if (overlay) {
                     overlay.classList.add('opening-video__overlay--hidden');
+                }
+                if (welcomeText) {
+                    welcomeText.classList.add('opening-video__welcome-text--hidden');
                 }
             }).catch(function () {
                 
