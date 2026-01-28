@@ -591,12 +591,14 @@
         justify-content: center;
         pointer-events: auto;
         background: radial-gradient(circle at center, rgba(0,0,0,0.35), rgba(0,0,0,0.65));
-        transition: opacity 0.4s ease;
+        transition: opacity 0.4s ease, visibility 0.4s ease;
+        visibility: visible;
     }
 
     .opening-video__overlay--hidden {
-        opacity: 0;
-        pointer-events: none;
+        opacity: 0 !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
     }
 
      
@@ -608,7 +610,7 @@
             0 0 10px rgba(255, 255, 255, 0.8),
             0 0 20px rgba(255, 255, 255, 0.6),
             0 0 30px rgba(255, 255, 255, 0.4);
-        margin-bottom: 140px;
+        margin-bottom: 40px;
         opacity: 1;
         transition: opacity 0.4s ease, transform 0.4s ease;
         animation: welcomeTextGlow 2s ease-in-out infinite alternate;
@@ -766,7 +768,6 @@
         src="/comic/%e5%bc%80%e5%9c%ba.mp4"
         playsinline
         preload="auto"
-        muted
     ></video>
     <div id="opening-loader" class="opening-video__loader"></div>
     <div id="opening-play-overlay" class="opening-video__overlay">
@@ -799,6 +800,9 @@
         if (!video) return;
 
         
+        var isPlaying = false;
+
+        
         if (loader) {
             loader.style.display = 'block';
         }
@@ -814,6 +818,7 @@
 
         
         video.addEventListener('canplay', function() {
+            
             if (loader) {
                 loader.classList.add('opening-video__loader--hidden');
                 setTimeout(function() {
@@ -822,9 +827,20 @@
                     }
                 }, 300);
             }
-            if (overlay) {
+            
+            if (!isPlaying && overlay) {
                 overlay.style.opacity = '1';
             }
+        });
+
+        
+        video.addEventListener('play', function() {
+            isPlaying = true;
+        });
+
+        
+        video.addEventListener('pause', function() {
+            isPlaying = false;
         });
 
         
@@ -857,15 +873,24 @@
         
         function startPlayback() {
             if (!video) return;
-            video.play().then(function () {
+            
+            
+            if (overlay) {
+                overlay.classList.add('opening-video__overlay--hidden');
+            }
+            if (welcomeText) {
+                welcomeText.classList.add('opening-video__welcome-text--hidden');
+            }
+            
+            
+            video.play().catch(function () {
+                
                 if (overlay) {
-                    overlay.classList.add('opening-video__overlay--hidden');
+                    overlay.classList.remove('opening-video__overlay--hidden');
                 }
                 if (welcomeText) {
-                    welcomeText.classList.add('opening-video__welcome-text--hidden');
+                    welcomeText.classList.remove('opening-video__welcome-text--hidden');
                 }
-            }).catch(function () {
-                
             });
         }
 
@@ -1260,6 +1285,230 @@ p code, li code {
 
     initScrollTop();
 </script>
+<style>
+     
+
+     
+    .article-list article {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .article-list article:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15) !important;
+    }
+
+     
+    .article-list article .article-image {
+        overflow: hidden;
+    }
+
+    .article-list article .article-image img {
+        transition: transform 0.4s ease, filter 0.4s ease;
+    }
+
+    .article-list article:hover .article-image img {
+        transform: scale(1.08);
+        filter: brightness(1.1);
+    }
+
+     
+    .article-list article .article-title a {
+        position: relative;
+        transition: color 0.3s ease;
+    }
+
+    .article-list article:hover .article-title a {
+        color: #f472b6 !important;
+    }
+
+     
+    .article-list article .article-title a::after {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: linear-gradient(90deg, #f472b6, #818cf8);
+        transition: width 0.3s ease;
+    }
+
+    .article-list article:hover .article-title a::after {
+        width: 100%;
+    }
+
+     
+    .article-list article .article-details {
+        transition: transform 0.3s ease;
+    }
+
+    .article-list article:hover .article-details {
+        transform: translateY(-2px);
+    }
+
+     
+    .article-list article .article-subtitle {
+        transition: color 0.3s ease;
+    }
+
+    .article-list article:hover .article-subtitle {
+        color: #6b7280 !important;
+    }
+
+     
+    .article-list article .article-tags {
+        transition: transform 0.3s ease;
+    }
+
+    .article-list article:hover .article-tags {
+        transform: translateY(-3px);
+    }
+
+    .article-list article .article-tags a {
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .article-list article .article-tags a:hover {
+        transform: scale(1.05);
+    }
+
+     
+    .article-list article .article-meta {
+        transition: opacity 0.3s ease;
+    }
+
+    .article-list article:hover .article-meta {
+        opacity: 0.8;
+    }
+
+     
+
+     
+    .search-form {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .search-form:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .search-form input {
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .search-form input:focus {
+        border-color: #f472b6 !important;
+        box-shadow: 0 0 0 3px rgba(244, 114, 182, 0.2) !important;
+    }
+
+    .search-form button {
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .search-form button:hover {
+        background-color: #f472b6 !important;
+        transform: scale(1.05);
+    }
+
+     
+    .widget.archives {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .widget.archives:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .widget-archive--list a {
+        transition: all 0.3s ease;
+        position: relative;
+    }
+
+    .widget-archive--list a::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: linear-gradient(90deg, #f472b6, #818cf8);
+        transition: width 0.3s ease;
+    }
+
+    .widget-archive--list a:hover {
+        color: #f472b6 !important;
+        transform: translateX(5px);
+    }
+
+    .widget-archive--list a:hover::after {
+        width: 100%;
+    }
+
+    .widget-archive--list .year {
+        transition: color 0.3s ease;
+    }
+
+    .widget-archive--list a:hover .year {
+        color: #f472b6 !important;
+    }
+
+     
+    .widget.tagCloud {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .widget.tagCloud:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .tagCloud-tags a {
+        transition: all 0.3s ease;
+        position: relative;
+    }
+
+    .tagCloud-tags a::after {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: linear-gradient(90deg, #f472b6, #818cf8);
+        transition: width 0.3s ease;
+    }
+
+    .tagCloud-tags a:hover {
+        color: #f472b6 !important;
+        transform: scale(1.1);
+        text-shadow: 0 0 10px rgba(244, 114, 182, 0.3);
+    }
+
+    .tagCloud-tags a:hover::after {
+        width: 100%;
+    }
+
+     
+    .widget-title {
+        transition: color 0.3s ease;
+    }
+
+    .widget:hover .widget-title {
+        color: #f472b6 !important;
+    }
+
+     
+    .widget-icon {
+        transition: transform 0.3s ease;
+    }
+
+    .widget:hover .widget-icon {
+        transform: translateY(-3px);
+    }
+</style>
 <script src=https://1273898.github.io/background/sakura.js></script>
 
     </body>
