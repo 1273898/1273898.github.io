@@ -61,6 +61,9 @@
 &lt;/h3&gt;&lt;p&gt;(1) 修改&lt;code&gt;assets/waifu/waifu-tips.json&lt;/code&gt;，修改里面的css选择器，来适配页面内容元素，这边以复制按钮为例&lt;/p&gt;
 &lt;p&gt;(2) 查看复制按钮的元素，属性为&lt;code&gt;class=&amp;quot;copyCodeButton&amp;quot;&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;(3) 修改&lt;code&gt;assets/waifu/waifu-tips.json&lt;/code&gt;，新增or修改对应的文本，修改对应的css选择器&lt;/p&gt;
+&lt;h2 id=&#34;3-修改博客样式&#34;&gt;3 修改博客样式
+&lt;/h2&gt;&lt;p&gt;具体详情参考&lt;a class=&#34;link&#34; href=&#34;https://letere-gzj.github.io/hugo-stack/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Hugo Stack 文档&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://1273898.github.io/images/fufu.jpg&#34;
 	
 	
