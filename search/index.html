@@ -127,25 +127,6 @@
         
         
         <li >
-            <a href='/%E5%85%B3%E4%BA%8E/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="12" cy="7" r="4" />
-  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
-</svg>
-
-
-
-                
-                <span>关于</span>
-            </a>
-        </li>
-        
-        
-        <li >
             <a href='/archives/' >
                 
                 
@@ -332,6 +313,11 @@
 </script>
 
 
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preconnect" href="https://raw.githubusercontent.com" crossorigin>
+<link rel="preconnect" href="https://1273898.github.io" crossorigin>
+<link rel="preload" href="https://cdn.jsdelivr.net/gh/1273898/1273898.github.io@main/static/comic/开场.mp4" as="video" type="video/mp4">
 <script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
 <script>
     var pjax = new Pjax({
@@ -646,6 +632,45 @@
         opacity: 0;
     }
 
+     
+    .opening-video__skip-btn {
+        margin-top: 20px;
+        background: rgba(0, 0, 0, 0.5);
+        color: white;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        padding: 8px 16px;
+        border-radius: 20px;
+        cursor: pointer;
+        font-size: 14px;
+        font-family: inherit;
+        transition: all 0.3s ease;
+        opacity: 0.8;
+    }
+
+    .opening-video__skip-btn:hover {
+        background: rgba(0, 0, 0, 0.7);
+        border-color: rgba(255, 255, 255, 0.5);
+        opacity: 1;
+        transform: translateY(-2px);
+    }
+
+    .opening-video__skip-btn:active {
+        transform: translateY(0);
+    }
+
+     
+    .opening-video__loader::before {
+        content: attr(data-progress) "%";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: #2ac3f2;
+        font-size: 12px;
+        font-weight: bold;
+        text-shadow: 0 0 5px rgba(42, 195, 242, 0.8);
+    }
+
     @keyframes openingLoaderSpin {
         0% {
             transform: translate(-50%, -50%) rotate(0deg);
@@ -755,9 +780,10 @@
 <div id="opening-video" class="opening-video">
     <video
         class="opening-video__media"
-        src="/comic/%e5%bc%80%e5%9c%ba.mp4"
+        src=""
         playsinline
         preload="auto"
+        poster="/comic/%e5%bc%80%e5%9c%ba-poster.jpg"
     ></video>
     <div id="opening-loader" class="opening-video__loader"></div>
     <div id="opening-play-overlay" class="opening-video__overlay">
@@ -768,6 +794,14 @@
             aria-label="播放开场动画"
         >
             <span class="opening-video__play-icon"></span>
+        </button>
+        <button
+            type="button"
+            class="opening-video__skip-btn"
+            aria-label="跳过开场动画"
+            style="margin-top: 20px; background: rgba(0,0,0,0.5); color: white; border: 1px solid rgba(255,255,255,0.3); padding: 8px 16px; border-radius: 20px; cursor: pointer; font-size: 14px;"
+        >
+            跳过开场动画
         </button>
     </div>
 </div>
@@ -784,10 +818,32 @@
         var video = container.querySelector('video');
         var overlay = document.getElementById('opening-play-overlay');
         var loader = document.getElementById('opening-loader');
-        var playBtn = overlay ? overlay.querySelector('button') : null;
+        var playBtn = overlay ? overlay.querySelector('.opening-video__play-btn') : null;
+        var skipBtn = overlay ? overlay.querySelector('.opening-video__skip-btn') : null;
         var welcomeText = document.getElementById('opening-welcome-text');
         var fontSwitchContainer = document.querySelector('.font-switch-container');
         if (!video) return;
+
+        
+        
+        var videoSources = [
+            
+            "https://cdn.jsdelivr.net/gh/1273898/1273898.github.io@main/static/comic/开场.mp4",
+            
+            "https://raw.githubusercontent.com/1273898/1273898.github.io/main/static/comic/开场.mp4",
+            
+            "https://1273898.github.io/comic/开场.mp4",
+            
+            "\/comic\/开场.mp4"
+        ];
+
+        
+        var currentSourceIndex = 0;
+        
+        
+        var videoLoaded = false;
+        var loadingAttempts = 0;
+        var maxLoadingAttempts = videoSources.length;
 
         
         var isPlaying = false;
@@ -807,7 +863,61 @@
         }
 
         
+        function loadVideoFromCDN() {
+            if (currentSourceIndex >= maxLoadingAttempts || videoLoaded) {
+                console.warn('所有视频源尝试失败，使用本地回退');
+                video.src = videoSources[videoSources.length - 1]; 
+                return;
+            }
+
+            var source = videoSources[currentSourceIndex];
+            console.log('尝试加载视频源:', source);
+            
+            
+            var testRequest = new XMLHttpRequest();
+            testRequest.open('HEAD', source);
+            testRequest.timeout = 5000; 
+            
+            testRequest.onload = function() {
+                if (testRequest.status === 200) {
+                    console.log('CDN 可用，开始加载视频:', source);
+                    video.src = source;
+                    video.load();
+                } else {
+                    console.warn('CDN 返回状态码:', testRequest.status);
+                    tryNextSource();
+                }
+            };
+            
+            testRequest.onerror = function() {
+                console.warn('CDN 连接失败:', source);
+                tryNextSource();
+            };
+            
+            testRequest.ontimeout = function() {
+                console.warn('CDN 连接超时:', source);
+                tryNextSource();
+            };
+            
+            testRequest.send();
+        }
+
+        function tryNextSource() {
+            currentSourceIndex++;
+            if (currentSourceIndex < maxLoadingAttempts) {
+                setTimeout(loadVideoFromCDN, 500); 
+            } else {
+                
+                video.src = videoSources[videoSources.length - 1];
+                video.load();
+            }
+        }
+
+        
         video.addEventListener('canplay', function() {
+            videoLoaded = true;
+            console.log('视频加载成功，可以播放');
+            
             
             if (loader) {
                 loader.classList.add('opening-video__loader--hidden');
@@ -824,6 +934,30 @@
         });
 
         
+        video.addEventListener('progress', function() {
+            if (video.buffered.length > 0) {
+                var bufferedEnd = video.buffered.end(video.buffered.length - 1);
+                var duration = video.duration;
+                if (duration > 0) {
+                    var loadedPercentage = (bufferedEnd / duration) * 100;
+                    console.log('视频加载进度:', loadedPercentage.toFixed(1) + '%');
+                    
+                    
+                    if (loader) {
+                        loader.style.background = `conic-gradient(
+                            #2ac3f2 0% ${loadedPercentage}%,
+                            rgba(42, 195, 242, 0.2) ${loadedPercentage}% 100%
+                        )`;
+                        loader.setAttribute('data-progress', Math.round(loadedPercentage));
+                    }
+                }
+            }
+        });
+
+        
+        loadVideoFromCDN();
+
+        
         video.addEventListener('play', function() {
             isPlaying = true;
         });
@@ -835,8 +969,12 @@
 
         
         video.addEventListener('error', function() {
-            console.error('开场视频加载失败');
-            hide();
+            console.error('视频加载失败，尝试下一个源');
+            if (!videoLoaded) {
+                tryNextSource();
+            } else {
+                hide();
+            }
         });
 
         function hide() {
@@ -852,6 +990,14 @@
                     fontSwitchContainer.style.visibility = 'visible';
                 }
             }, 700);
+        }
+
+        
+        if (skipBtn) {
+            skipBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                hide();
+            });
         }
 
         

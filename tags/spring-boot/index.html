@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="">
-<title>归档</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="遇所见之人，见所见之事">
+<title>Tag: Spring Boot - 不敬仙师</title>
 
-<link rel='canonical' href='https://1273898.github.io/archives/'>
+<link rel='canonical' href='https://1273898.github.io/tags/spring-boot/'>
 
-<link rel="stylesheet" href="/scss/style.min.b2944aefbc8b344c6292fb41518c34f1bd83bcd18dcd140857d69eb44e5fe98f.css"><meta property='og:title' content="归档">
-<meta property='og:description' content="">
-<meta property='og:url' content='https://1273898.github.io/archives/'>
+<link rel="stylesheet" href="/scss/style.min.b2944aefbc8b344c6292fb41518c34f1bd83bcd18dcd140857d69eb44e5fe98f.css"><meta property='og:title' content="Tag: Spring Boot - 不敬仙师">
+<meta property='og:description' content="遇所见之人，见所见之事">
+<meta property='og:url' content='https://1273898.github.io/tags/spring-boot/'>
 <meta property='og:site_name' content='不敬仙师'>
-<meta property='og:type' content='article'><meta property='article:section' content='Page' /><meta property='article:published_time' content='2019-05-28T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2026-01-24T12:50:13&#43;08:00'/>
-<meta name="twitter:title" content="归档">
-<meta name="twitter:description" content="">
+<meta property='og:type' content='website'><meta property='og:updated_time' content=' 2026-03-26T10:22:30&#43;08:00 '/>
+<meta name="twitter:title" content="Tag: Spring Boot - 不敬仙师">
+<meta name="twitter:description" content="遇所见之人，见所见之事"><link rel="alternate" type="application/rss&#43;xml" href="https://1273898.github.io/tags/spring-boot/index.xml">
     <link rel="shortcut icon" href="/favicon.ico" />
 
     </head>
-    <body class="template-archives">
+    <body class="">
     <script>
         (function() {
             const colorSchemeKey = 'StackColorScheme';
@@ -126,7 +126,7 @@
         </li>
         
         
-        <li  class='current' >
+        <li >
             <a href='/archives/' >
                 
                 
@@ -212,40 +212,373 @@
     </ol>
 </aside>
 
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                <div class="clock-container">
+    
+    <div class="card">
+        <div class="numbers">
+          <span class="number"></span>
+          <span class="number"></span>
+          <span class="number"></span>
+          <span class="number"></span>
+          <span class="number"></span>
+          <span class="number"></span>
+          <span class="number"></span>
+          <span class="number"></span>
+          <span class="number"></span>
+          <span class="number"></span>
+          <span class="number"></span>
+          <span class="number"></span>
+        </div>
+        <div class="needles">
+          <span class="h"></span>
+          <span class="m"></span>
+          <span class="s"></span>
+          <span class="center"></span>
+        </div>
+        <div class="pie"></div>
+      </div>
+      
+</div>
+
+<script>
+    (function() {
+        function updateClock() {
+            const now = new Date();
+            const hours = now.getHours() % 12; 
+            const minutes = now.getMinutes();
+            const seconds = now.getSeconds();
+            const milliseconds = now.getMilliseconds();
+            
+            
+            
+            const hourAngle = (hours * 30) + (minutes * 0.5);
+            
+            const minuteAngle = (minutes * 6) + (seconds * 0.1);
+            
+            const secondAngle = (seconds * 6) + (milliseconds * 0.006);
+            
+            
+            const hourHand = document.querySelector('.h');
+            const minuteHand = document.querySelector('.m');
+            const secondHand = document.querySelector('.s');
+            
+            if (hourHand) {
+                hourHand.style.transform = `translate(-50%, -100%) rotateZ(${hourAngle}deg)`;
+            }
+            if (minuteHand) {
+                minuteHand.style.transform = `translate(-50%, -100%) rotateZ(${minuteAngle}deg)`;
+            }
+            if (secondHand) {
+                secondHand.style.transform = `translate(-50%, -80%) rotateZ(${secondAngle}deg)`;
+            }
+        }
+        
+        
+        function initClock() {
+            updateClock();
+            
+            setInterval(updateClock, 100);
+        }
+        
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initClock);
+        } else {
+            initClock();
+        }
+    })();
+</script>
+
+<style>
+     
+    .clock-container {
+        display: flex;
+        justify-content: flex-start;
+        margin-left: 80px;  
+    }
+    
+    .card {
+  width: 200px;
+  height: 200px;
+  background: transparent;
+  border-radius: 50%;
+  border: 20px solid transparent;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 2px 2px 2px black, inset 2px 2px 2px black,
+    -1px -1px 5px rgba(0, 0, 0, 0.473), inset -1px -1px 5px rgba(0, 0, 0, 0.473);
+}
+
+.numbers {
+  font-weight: bold;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  padding: 20px;
+  background-color: rgb(234, 221, 247);
+}
+
+.number {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: inline-block;
+  width: 0.1rem;
+  height: 0.9rem;
+  background-color: rgb(12, 26, 109);
+}
+.number:nth-child(1) {
+  transform: translate(-50%, -50%) rotateZ(calc(30deg)) translateY(-80px);
+}
+
+.number:nth-child(2) {
+  transform: translate(-50%, -50%) rotateZ(calc(60deg)) translateY(-80px);
+}
+
+.number:nth-child(3) {
+  transform: translate(-50%, -50%) rotateZ(calc(90deg)) translateY(-80px);
+}
+
+.number:nth-child(4) {
+  transform: translate(-50%, -50%) rotateZ(calc(120deg)) translateY(-80px);
+}
+
+.number:nth-child(5) {
+  transform: translate(-50%, -50%) rotateZ(calc(150deg)) translateY(-80px);
+}
+
+.number:nth-child(6) {
+  transform: translate(-50%, -50%) rotateZ(calc(180deg)) translateY(-80px);
+}
+
+.number:nth-child(7) {
+  transform: translate(-50%, -50%) rotateZ(calc(210deg)) translateY(-80px);
+}
+
+.number:nth-child(8) {
+  transform: translate(-50%, -50%) rotateZ(calc(240deg)) translateY(-80px);
+}
+
+.number:nth-child(9) {
+  transform: translate(-50%, -50%) rotateZ(calc(270deg)) translateY(-80px);
+}
+
+.number:nth-child(10) {
+  transform: translate(-50%, -50%) rotateZ(calc(300deg)) translateY(-80px);
+}
+
+.number:nth-child(11) {
+  transform: translate(-50%, -50%) rotateZ(calc(330deg)) translateY(-80px);
+}
+
+.number:nth-child(12) {
+  transform: translate(-50%, -50%) rotateZ(calc(0deg)) translateY(-80px);
+}
+
+.number:nth-child(3),
+.number:nth-child(6),
+.number:nth-child(9),
+.number:nth-child(12) {
+  width: 0.3rem;
+  height: 1.5rem;
+}
+
+.needles {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.h,
+.m,
+.s,
+.center {
+  display: inline-block;
+  width: 7px;
+  height: 20px;
+  background-color: black;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50% 50% 0 0;
+}
+
+.s {
+  transform: translate(-50%, -80%);
+}
+
+.h {
+  background-color: black;
+  transform-origin: 50% 100%;
+  height: 2.5rem;
+  z-index: 1;
+  transition: transform 0.1s linear;
+}
+
+.m {
+  background-color: rgb(176, 176, 185);
+  z-index: 2;
+  height: 4rem;
+  width: 5px;
+  transform-origin: 50% 100%;
+  transition: transform 0.1s linear;
+}
+
+.s {
+  background-color: rgb(30, 207, 242);
+  z-index: 3;
+  height: 5rem;
+  width: 3px;
+  transform-origin: 50% 80%;
+  transition: transform 0.05s linear;
+}
+
+.center {
+  width: 15px;
+  height: 15px;
+  background-color: white;
+  border: solid 4px rgb(45, 176, 216);
+  z-index: 4;
+  border-radius: 50%;
+}
+
+
+</style>
+
+            
+        
+            
+                <form action="/search/" class="search-form widget" >
+        <p>
+            <label>搜索</label>
+            <input name="keyword" required placeholder="输入关键词..." />
+        
+            <button title="搜索">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+            </button>
+        </p>
+    </form>
+            
+        
+            
+                <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-infinity" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M9.828 9.172a4 4 0 1 0 0 5.656 a10 10 0 0 0 2.172 -2.828a10 10 0 0 1 2.172 -2.828 a4 4 0 1 1 0 5.656a10 10 0 0 1 -2.172 -2.828a10 10 0 0 0 -2.172 -2.828" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">归档</h2>
+
+        
+        
+        
+        
+        <div class="widget-archive--list">
+            <div class="archives-year">
+                    <a href="/archives/#2026">
+                        
+                            <span class="year">2026</span>
+                            <span class="count">2</span>
+                        
+                    </a> 
+                </div>
+            
+        </div>
+    </section>
+            
+        
+            
+                <section class="widget tagCloud">
+    <div class="widget-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-tag" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11 3L20 12a1.5 1.5 0 0 1 0 2L14 20a1.5 1.5 0 0 1 -2 0L3 11v-4a4 4 0 0 1 4 -4h4" />
+  <circle cx="9" cy="9" r="2" />
+</svg>
+
+
+
+    </div>
+    <h2 class="widget-title section-title">标签云</h2>
+
+    <div class="tagCloud-tags">
+        
+            <a href="/tags/hugo/">
+                Hugo
+            </a>
+        
+            <a href="/tags/java/">
+                Java
+            </a>
+        
+            <a href="/tags/md%E6%96%87%E6%A1%A3/">
+                Md文档
+            </a>
+        
+            <a href="/tags/spring-boot/">
+                Spring Boot
+            </a>
+        
+            <a href="/tags/%E4%BA%BA%E6%89%8D%E5%B8%82%E5%9C%BA/">
+                人才市场
+            </a>
+        
+            <a href="/tags/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/">
+                后端开发
+            </a>
+        
+            <a href="/tags/%E5%B7%A5%E7%A8%8B%E6%96%87%E6%A1%A3/">
+                工程文档
+            </a>
+        
+    </div>
+</section>
+
+            
+        
+    </aside>
+
+
             <main class="main full-width">
     <header>
-        <h2 class="section-title">分类</h2>
-        <div class="subsection-list">
-            <div class="article-list--tile">
-                
-                    
-<article class="">
-    <a href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">
-        
-        
+        <h3 class="section-title">
+            
+                Tags
+            
+        </h3>
 
-        <div class="article-details">
-            <h2 class="article-title">技术文档</h2>
-        </div>
-    </a>
-</article>
-
+        <div class="section-card">
+            <div class="section-details">
+                <h3 class="section-count">1 个页面</h3>
+                <h1 class="section-term">Spring Boot</h1>
                 
             </div>
         </div>
-        
     </header>
-
     
-    
-
-    
-    
-    <div class="archives-group" id="2026">
-        <h2 class="archives-date section-title"><a href="/archives/#2026">2026</a></h2>
-        <div class="article-list--compact">
-            
-                <article>
+    <section class="article-list--compact">
+        
+            <article>
     <a href="/p/%E9%9B%86%E5%9B%A2%E4%BA%BA%E6%89%8D%E5%B8%82%E5%9C%BA%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%B7%A5%E7%A8%8B%E6%93%8D%E4%BD%9C%E6%89%8B%E5%86%8C/">
         <div class="article-details">
             <h2 class="article-title">集团人才市场服务端工程操作手册</h2>
@@ -261,29 +594,8 @@
         
     </a>
 </article>
-            
-                <article>
-    <a href="/p/hugo%E6%96%87%E7%AB%A0%E6%93%8D%E4%BD%9C%E8%AF%B4%E6%98%8E/">
-        <div class="article-details">
-            <h2 class="article-title">Hugo文章操作说明</h2>
-            <footer class="article-time">
-                <time datetime='2026-01-24T12:25:51&#43;08:00'>2026-01-24</time>
-            </footer>
-        </div>
-            <div class="article-image">
-                
-                    <img src="/images/fufu1.jpg" loading="lazy" alt="Featured image of post Hugo文章操作说明" />
-                
-            </div>
         
-    </a>
-</article>
-            
-        </div>
-    </div>
-    
-
-    <footer class="site-footer">
+    </section><footer class="site-footer">
     <section class="copyright">
         &copy; 
         

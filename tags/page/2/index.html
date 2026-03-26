@@ -1,24 +1,22 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="This is a test page for i18n support.\n">
-<title>关于</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="遇所见之人，见所见之事">
+<title>Tags</title>
 
-<link rel='canonical' href='https://1273898.github.io/%E5%85%B3%E4%BA%8E/'>
+<link rel='canonical' href='https://1273898.github.io/tags/'>
 
-<link rel="stylesheet" href="/scss/style.min.b2944aefbc8b344c6292fb41518c34f1bd83bcd18dcd140857d69eb44e5fe98f.css"><meta property='og:title' content="关于">
-<meta property='og:description' content="This is a test page for i18n support.\n">
-<meta property='og:url' content='https://1273898.github.io/%E5%85%B3%E4%BA%8E/'>
+<link rel="stylesheet" href="/scss/style.min.b2944aefbc8b344c6292fb41518c34f1bd83bcd18dcd140857d69eb44e5fe98f.css"><meta property='og:title' content="Tags">
+<meta property='og:description' content="遇所见之人，见所见之事">
+<meta property='og:url' content='https://1273898.github.io/tags/'>
 <meta property='og:site_name' content='不敬仙师'>
-<meta property='og:type' content='article'><meta property='article:section' content='Page' /><meta property='article:modified_time' content='2026-01-24T12:50:13&#43;08:00'/>
-<meta name="twitter:title" content="关于">
-<meta name="twitter:description" content="This is a test page for i18n support.\n">
+<meta property='og:type' content='website'><meta property='og:updated_time' content=' 2026-03-26T10:22:30&#43;08:00 '/>
+<meta name="twitter:title" content="Tags">
+<meta name="twitter:description" content="遇所见之人，见所见之事"><link rel="alternate" type="application/rss&#43;xml" href="https://1273898.github.io/tags/index.xml">
     <link rel="shortcut icon" href="/favicon.ico" />
 
     </head>
-    <body class="
-    article-page
-    ">
+    <body class="">
     <script>
         (function() {
             const colorSchemeKey = 'StackColorScheme';
@@ -128,25 +126,6 @@
         </li>
         
         
-        <li  class='current' >
-            <a href='/%E5%85%B3%E4%BA%8E/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="12" cy="7" r="4" />
-  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
-</svg>
-
-
-
-                
-                <span>关于</span>
-            </a>
-        </li>
-        
-        
         <li >
             <a href='/archives/' >
                 
@@ -233,72 +212,418 @@
     </ol>
 </aside>
 
-    
-
-            <main class="main full-width">
-    <article class="main-article">
-    <header class="article-header">
-
-    <div class="article-details">
-    
-
-    <div class="article-title-wrapper">
-        <h2 class="article-title">
-            <a href="/%E5%85%B3%E4%BA%8E/">关于</a>
-        </h2>
-    
+    <aside class="sidebar right-sidebar sticky">
         
-    </div>
-
+            
+                <div class="clock-container">
     
-    
-    
-    
-
-    
+    <div class="card">
+        <div class="numbers">
+          <span class="number"></span>
+          <span class="number"></span>
+          <span class="number"></span>
+          <span class="number"></span>
+          <span class="number"></span>
+          <span class="number"></span>
+          <span class="number"></span>
+          <span class="number"></span>
+          <span class="number"></span>
+          <span class="number"></span>
+          <span class="number"></span>
+          <span class="number"></span>
+        </div>
+        <div class="needles">
+          <span class="h"></span>
+          <span class="m"></span>
+          <span class="s"></span>
+          <span class="center"></span>
+        </div>
+        <div class="pie"></div>
+      </div>
+      
 </div>
 
-</header>
+<script>
+    (function() {
+        function updateClock() {
+            const now = new Date();
+            const hours = now.getHours() % 12; 
+            const minutes = now.getMinutes();
+            const seconds = now.getSeconds();
+            const milliseconds = now.getMilliseconds();
+            
+            
+            
+            const hourAngle = (hours * 30) + (minutes * 0.5);
+            
+            const minuteAngle = (minutes * 6) + (seconds * 0.1);
+            
+            const secondAngle = (seconds * 6) + (milliseconds * 0.006);
+            
+            
+            const hourHand = document.querySelector('.h');
+            const minuteHand = document.querySelector('.m');
+            const secondHand = document.querySelector('.s');
+            
+            if (hourHand) {
+                hourHand.style.transform = `translate(-50%, -100%) rotateZ(${hourAngle}deg)`;
+            }
+            if (minuteHand) {
+                minuteHand.style.transform = `translate(-50%, -100%) rotateZ(${minuteAngle}deg)`;
+            }
+            if (secondHand) {
+                secondHand.style.transform = `translate(-50%, -80%) rotateZ(${secondAngle}deg)`;
+            }
+        }
+        
+        
+        function initClock() {
+            updateClock();
+            
+            setInterval(updateClock, 100);
+        }
+        
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initClock);
+        } else {
+            initClock();
+        }
+    })();
+</script>
 
-    <section class="article-content">
+<style>
+     
+    .clock-container {
+        display: flex;
+        justify-content: flex-start;
+        margin-left: 80px;  
+    }
     
-    
-    <p>This is a test page for i18n support.</p>
+    .card {
+  width: 200px;
+  height: 200px;
+  background: transparent;
+  border-radius: 50%;
+  border: 20px solid transparent;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 2px 2px 2px black, inset 2px 2px 2px black,
+    -1px -1px 5px rgba(0, 0, 0, 0.473), inset -1px -1px 5px rgba(0, 0, 0, 0.473);
+}
 
-</section>
+.numbers {
+  font-weight: bold;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  padding: 20px;
+  background-color: rgb(234, 221, 247);
+}
+
+.number {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: inline-block;
+  width: 0.1rem;
+  height: 0.9rem;
+  background-color: rgb(12, 26, 109);
+}
+.number:nth-child(1) {
+  transform: translate(-50%, -50%) rotateZ(calc(30deg)) translateY(-80px);
+}
+
+.number:nth-child(2) {
+  transform: translate(-50%, -50%) rotateZ(calc(60deg)) translateY(-80px);
+}
+
+.number:nth-child(3) {
+  transform: translate(-50%, -50%) rotateZ(calc(90deg)) translateY(-80px);
+}
+
+.number:nth-child(4) {
+  transform: translate(-50%, -50%) rotateZ(calc(120deg)) translateY(-80px);
+}
+
+.number:nth-child(5) {
+  transform: translate(-50%, -50%) rotateZ(calc(150deg)) translateY(-80px);
+}
+
+.number:nth-child(6) {
+  transform: translate(-50%, -50%) rotateZ(calc(180deg)) translateY(-80px);
+}
+
+.number:nth-child(7) {
+  transform: translate(-50%, -50%) rotateZ(calc(210deg)) translateY(-80px);
+}
+
+.number:nth-child(8) {
+  transform: translate(-50%, -50%) rotateZ(calc(240deg)) translateY(-80px);
+}
+
+.number:nth-child(9) {
+  transform: translate(-50%, -50%) rotateZ(calc(270deg)) translateY(-80px);
+}
+
+.number:nth-child(10) {
+  transform: translate(-50%, -50%) rotateZ(calc(300deg)) translateY(-80px);
+}
+
+.number:nth-child(11) {
+  transform: translate(-50%, -50%) rotateZ(calc(330deg)) translateY(-80px);
+}
+
+.number:nth-child(12) {
+  transform: translate(-50%, -50%) rotateZ(calc(0deg)) translateY(-80px);
+}
+
+.number:nth-child(3),
+.number:nth-child(6),
+.number:nth-child(9),
+.number:nth-child(12) {
+  width: 0.3rem;
+  height: 1.5rem;
+}
+
+.needles {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.h,
+.m,
+.s,
+.center {
+  display: inline-block;
+  width: 7px;
+  height: 20px;
+  background-color: black;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50% 50% 0 0;
+}
+
+.s {
+  transform: translate(-50%, -80%);
+}
+
+.h {
+  background-color: black;
+  transform-origin: 50% 100%;
+  height: 2.5rem;
+  z-index: 1;
+  transition: transform 0.1s linear;
+}
+
+.m {
+  background-color: rgb(176, 176, 185);
+  z-index: 2;
+  height: 4rem;
+  width: 5px;
+  transform-origin: 50% 100%;
+  transition: transform 0.1s linear;
+}
+
+.s {
+  background-color: rgb(30, 207, 242);
+  z-index: 3;
+  height: 5rem;
+  width: 3px;
+  transform-origin: 50% 80%;
+  transition: transform 0.05s linear;
+}
+
+.center {
+  width: 15px;
+  height: 15px;
+  background-color: white;
+  border: solid 4px rgb(45, 176, 216);
+  z-index: 4;
+  border-radius: 50%;
+}
 
 
-    <footer class="article-footer">
-    
+</style>
 
-    <section class="article-lastmod">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            
+        
+            
+                <form action="/search/" class="search-form widget" >
+        <p>
+            <label>搜索</label>
+            <input name="keyword" required placeholder="输入关键词..." />
+        
+            <button title="搜索">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="12" cy="12" r="9" />
-  <polyline points="12 7 12 12 15 15" />
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
 </svg>
 
 
 
-        <span>
-            最后更新于 2026-01-24
-        </span>
-    </section></footer>
-
-
-    
-</article>
-
-    
-
-    
-
-     
-    
+            </button>
+        </p>
+    </form>
+            
         
-    
+            
+                <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-infinity" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M9.828 9.172a4 4 0 1 0 0 5.656 a10 10 0 0 0 2.172 -2.828a10 10 0 0 1 2.172 -2.828 a4 4 0 1 1 0 5.656a10 10 0 0 1 -2.172 -2.828a10 10 0 0 0 -2.172 -2.828" />
+</svg>
 
-    <footer class="site-footer">
+
+
+        </div>
+        <h2 class="widget-title section-title">归档</h2>
+
+        
+        
+        
+        
+        <div class="widget-archive--list">
+            <div class="archives-year">
+                    <a href="/archives/#2026">
+                        
+                            <span class="year">2026</span>
+                            <span class="count">2</span>
+                        
+                    </a> 
+                </div>
+            
+        </div>
+    </section>
+            
+        
+            
+                <section class="widget tagCloud">
+    <div class="widget-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-tag" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11 3L20 12a1.5 1.5 0 0 1 0 2L14 20a1.5 1.5 0 0 1 -2 0L3 11v-4a4 4 0 0 1 4 -4h4" />
+  <circle cx="9" cy="9" r="2" />
+</svg>
+
+
+
+    </div>
+    <h2 class="widget-title section-title">标签云</h2>
+
+    <div class="tagCloud-tags">
+        
+            <a href="/tags/hugo/">
+                Hugo
+            </a>
+        
+            <a href="/tags/java/">
+                Java
+            </a>
+        
+            <a href="/tags/md%E6%96%87%E6%A1%A3/">
+                Md文档
+            </a>
+        
+            <a href="/tags/spring-boot/">
+                Spring Boot
+            </a>
+        
+            <a href="/tags/%E4%BA%BA%E6%89%8D%E5%B8%82%E5%9C%BA/">
+                人才市场
+            </a>
+        
+            <a href="/tags/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/">
+                后端开发
+            </a>
+        
+            <a href="/tags/%E5%B7%A5%E7%A8%8B%E6%96%87%E6%A1%A3/">
+                工程文档
+            </a>
+        
+    </div>
+</section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <header>
+        <h3 class="section-title">
+            
+                章节
+            
+        </h3>
+
+        <div class="section-card">
+            <div class="section-details">
+                <h3 class="section-count">7 个页面</h3>
+                <h1 class="section-term">Tags</h1>
+                
+            </div>
+        </div>
+    </header>
+    
+    <section class="article-list--compact">
+        
+            <article>
+    <a href="/tags/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/">
+        <div class="article-details">
+            <h2 class="article-title">后端开发</h2>
+            <footer class="article-time">
+                <time datetime='2026-03-25T17:15:00&#43;08:00'>2026-03-25</time>
+            </footer>
+        </div>
+    </a>
+</article>
+        
+            <article>
+    <a href="/tags/%E4%BA%BA%E6%89%8D%E5%B8%82%E5%9C%BA/">
+        <div class="article-details">
+            <h2 class="article-title">人才市场</h2>
+            <footer class="article-time">
+                <time datetime='2026-03-25T17:15:00&#43;08:00'>2026-03-25</time>
+            </footer>
+        </div>
+    </a>
+</article>
+        
+            <article>
+    <a href="/tags/hugo/">
+        <div class="article-details">
+            <h2 class="article-title">Hugo</h2>
+            <footer class="article-time">
+                <time datetime='2026-01-24T12:25:51&#43;08:00'>2026-01-24</time>
+            </footer>
+        </div>
+    </a>
+</article>
+        
+    </section><nav class="pagination" role="navigation" aria-label="pagination"><a class="page-link "href="/tags/"aria-label="Previous page">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-left"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 6l-6 6l6 6" /></svg>
+    </a><a class="page-link " aria-label="Page 1"href="/tags/">
+        1
+    </a><a class="page-link current"aria-current="page"href="/tags/page/2/"
+                aria-label="Page 2">
+                2
+            </a><a class="page-link "href="/tags/page/3/"aria-label="Page 3">
+        3
+    </a><a class="page-link "href="/tags/page/3/"aria-label="Next page">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-right"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 6l6 6l-6 6" /></svg>
+    </a>
+</nav><footer class="site-footer">
     <section class="copyright">
         &copy; 
         
@@ -311,85 +636,6 @@
     </section>
 </footer>
 
-
-    
-<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
-
-    
-    <div class="pswp__bg"></div>
-
-    
-    <div class="pswp__scroll-wrap">
-
-        
-        <div class="pswp__container">
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-        </div>
-
-        
-        <div class="pswp__ui pswp__ui--hidden">
-
-            <div class="pswp__top-bar">
-
-                
-
-                <div class="pswp__counter"></div>
-
-                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
-
-                <button class="pswp__button pswp__button--share" title="Share"></button>
-
-                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
-
-                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
-
-                
-                
-                <div class="pswp__preloader">
-                    <div class="pswp__preloader__icn">
-                        <div class="pswp__preloader__cut">
-                            <div class="pswp__preloader__donut"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-                <div class="pswp__share-tooltip"></div>
-            </div>
-
-            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
-            </button>
-
-            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
-            </button>
-
-            <div class="pswp__caption">
-                <div class="pswp__caption__center"></div>
-            </div>
-
-        </div>
-
-    </div>
-
-</div><script 
-                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
-                defer
-                >
-            </script><script 
-                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
-                defer
-                >
-            </script><link 
-                rel="stylesheet" 
-                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
-            ><link 
-                rel="stylesheet" 
-                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
-            >
-    
 
             </main>
         </div>
@@ -450,6 +696,11 @@
 </script>
 
 
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preconnect" href="https://raw.githubusercontent.com" crossorigin>
+<link rel="preconnect" href="https://1273898.github.io" crossorigin>
+<link rel="preload" href="https://cdn.jsdelivr.net/gh/1273898/1273898.github.io@main/static/comic/开场.mp4" as="video" type="video/mp4">
 <script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
 <script>
     var pjax = new Pjax({
@@ -764,6 +1015,45 @@
         opacity: 0;
     }
 
+     
+    .opening-video__skip-btn {
+        margin-top: 20px;
+        background: rgba(0, 0, 0, 0.5);
+        color: white;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        padding: 8px 16px;
+        border-radius: 20px;
+        cursor: pointer;
+        font-size: 14px;
+        font-family: inherit;
+        transition: all 0.3s ease;
+        opacity: 0.8;
+    }
+
+    .opening-video__skip-btn:hover {
+        background: rgba(0, 0, 0, 0.7);
+        border-color: rgba(255, 255, 255, 0.5);
+        opacity: 1;
+        transform: translateY(-2px);
+    }
+
+    .opening-video__skip-btn:active {
+        transform: translateY(0);
+    }
+
+     
+    .opening-video__loader::before {
+        content: attr(data-progress) "%";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: #2ac3f2;
+        font-size: 12px;
+        font-weight: bold;
+        text-shadow: 0 0 5px rgba(42, 195, 242, 0.8);
+    }
+
     @keyframes openingLoaderSpin {
         0% {
             transform: translate(-50%, -50%) rotate(0deg);
@@ -873,9 +1163,10 @@
 <div id="opening-video" class="opening-video">
     <video
         class="opening-video__media"
-        src="/comic/%e5%bc%80%e5%9c%ba.mp4"
+        src=""
         playsinline
         preload="auto"
+        poster="/comic/%e5%bc%80%e5%9c%ba-poster.jpg"
     ></video>
     <div id="opening-loader" class="opening-video__loader"></div>
     <div id="opening-play-overlay" class="opening-video__overlay">
@@ -886,6 +1177,14 @@
             aria-label="播放开场动画"
         >
             <span class="opening-video__play-icon"></span>
+        </button>
+        <button
+            type="button"
+            class="opening-video__skip-btn"
+            aria-label="跳过开场动画"
+            style="margin-top: 20px; background: rgba(0,0,0,0.5); color: white; border: 1px solid rgba(255,255,255,0.3); padding: 8px 16px; border-radius: 20px; cursor: pointer; font-size: 14px;"
+        >
+            跳过开场动画
         </button>
     </div>
 </div>
@@ -902,10 +1201,32 @@
         var video = container.querySelector('video');
         var overlay = document.getElementById('opening-play-overlay');
         var loader = document.getElementById('opening-loader');
-        var playBtn = overlay ? overlay.querySelector('button') : null;
+        var playBtn = overlay ? overlay.querySelector('.opening-video__play-btn') : null;
+        var skipBtn = overlay ? overlay.querySelector('.opening-video__skip-btn') : null;
         var welcomeText = document.getElementById('opening-welcome-text');
         var fontSwitchContainer = document.querySelector('.font-switch-container');
         if (!video) return;
+
+        
+        
+        var videoSources = [
+            
+            "https://cdn.jsdelivr.net/gh/1273898/1273898.github.io@main/static/comic/开场.mp4",
+            
+            "https://raw.githubusercontent.com/1273898/1273898.github.io/main/static/comic/开场.mp4",
+            
+            "https://1273898.github.io/comic/开场.mp4",
+            
+            "\/comic\/开场.mp4"
+        ];
+
+        
+        var currentSourceIndex = 0;
+        
+        
+        var videoLoaded = false;
+        var loadingAttempts = 0;
+        var maxLoadingAttempts = videoSources.length;
 
         
         var isPlaying = false;
@@ -925,7 +1246,61 @@
         }
 
         
+        function loadVideoFromCDN() {
+            if (currentSourceIndex >= maxLoadingAttempts || videoLoaded) {
+                console.warn('所有视频源尝试失败，使用本地回退');
+                video.src = videoSources[videoSources.length - 1]; 
+                return;
+            }
+
+            var source = videoSources[currentSourceIndex];
+            console.log('尝试加载视频源:', source);
+            
+            
+            var testRequest = new XMLHttpRequest();
+            testRequest.open('HEAD', source);
+            testRequest.timeout = 5000; 
+            
+            testRequest.onload = function() {
+                if (testRequest.status === 200) {
+                    console.log('CDN 可用，开始加载视频:', source);
+                    video.src = source;
+                    video.load();
+                } else {
+                    console.warn('CDN 返回状态码:', testRequest.status);
+                    tryNextSource();
+                }
+            };
+            
+            testRequest.onerror = function() {
+                console.warn('CDN 连接失败:', source);
+                tryNextSource();
+            };
+            
+            testRequest.ontimeout = function() {
+                console.warn('CDN 连接超时:', source);
+                tryNextSource();
+            };
+            
+            testRequest.send();
+        }
+
+        function tryNextSource() {
+            currentSourceIndex++;
+            if (currentSourceIndex < maxLoadingAttempts) {
+                setTimeout(loadVideoFromCDN, 500); 
+            } else {
+                
+                video.src = videoSources[videoSources.length - 1];
+                video.load();
+            }
+        }
+
+        
         video.addEventListener('canplay', function() {
+            videoLoaded = true;
+            console.log('视频加载成功，可以播放');
+            
             
             if (loader) {
                 loader.classList.add('opening-video__loader--hidden');
@@ -942,6 +1317,30 @@
         });
 
         
+        video.addEventListener('progress', function() {
+            if (video.buffered.length > 0) {
+                var bufferedEnd = video.buffered.end(video.buffered.length - 1);
+                var duration = video.duration;
+                if (duration > 0) {
+                    var loadedPercentage = (bufferedEnd / duration) * 100;
+                    console.log('视频加载进度:', loadedPercentage.toFixed(1) + '%');
+                    
+                    
+                    if (loader) {
+                        loader.style.background = `conic-gradient(
+                            #2ac3f2 0% ${loadedPercentage}%,
+                            rgba(42, 195, 242, 0.2) ${loadedPercentage}% 100%
+                        )`;
+                        loader.setAttribute('data-progress', Math.round(loadedPercentage));
+                    }
+                }
+            }
+        });
+
+        
+        loadVideoFromCDN();
+
+        
         video.addEventListener('play', function() {
             isPlaying = true;
         });
@@ -953,8 +1352,12 @@
 
         
         video.addEventListener('error', function() {
-            console.error('开场视频加载失败');
-            hide();
+            console.error('视频加载失败，尝试下一个源');
+            if (!videoLoaded) {
+                tryNextSource();
+            } else {
+                hide();
+            }
         });
 
         function hide() {
@@ -970,6 +1373,14 @@
                     fontSwitchContainer.style.visibility = 'visible';
                 }
             }, 700);
+        }
+
+        
+        if (skipBtn) {
+            skipBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                hide();
+            });
         }
 
         
