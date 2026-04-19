@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Prompt on 不敬仙师</title>
+        <link>https://1273898.github.io/tags/prompt/</link>
+        <description>Recent content in Prompt on 不敬仙师</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <copyright>不敬仙师</copyright>
+        <lastBuildDate>Sun, 19 Apr 2026 13:42:36 +0800</lastBuildDate><atom:link href="https://1273898.github.io/tags/prompt/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>AI随记</title>
+        <link>https://1273898.github.io/p/ai%E9%9A%8F%E8%AE%B0/</link>
+        <pubDate>Sun, 19 Apr 2026 00:00:00 +0000</pubDate>
+        
+        <guid>https://1273898.github.io/p/ai%E9%9A%8F%E8%AE%B0/</guid>
+        <description>&lt;h1 id=&#34;ai随记&#34;&gt;AI随记
+&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;1.当模型足够聪明的时候，你怎么问已经没那么重要了。Prompt - - &amp;gt; Harness工程 （建一个笼子，一个让AI Agent能在里面安全、高效、可控地干活的笼子）&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;2.甚至我觉得，如何使用AI演变到最后，其实就是人类历史上出现的那一门一门的古老的学科。&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Harness就是控制论。&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Skill其实就是分类学。&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Prompt其实就是语言学。&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Context其实就是信息科学。&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Reasoning其实就是认知心理学。&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;多Agent协同其实就是管理学。&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

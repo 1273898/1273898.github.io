@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>游戏策划 on 不敬仙师</title>
+        <link>https://1273898.github.io/tags/%E6%B8%B8%E6%88%8F%E7%AD%96%E5%88%92/</link>
+        <description>Recent content in 游戏策划 on 不敬仙师</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <copyright>不敬仙师</copyright>
+        <lastBuildDate>Sun, 19 Apr 2026 13:42:36 +0800</lastBuildDate><atom:link href="https://1273898.github.io/tags/%E6%B8%B8%E6%88%8F%E7%AD%96%E5%88%92/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>起床游戏策划案 v1.0</title>
+        <link>https://1273898.github.io/p/%E8%B5%B7%E5%BA%8A%E6%B8%B8%E6%88%8F%E7%AD%96%E5%88%92%E6%A1%88-v1.0/</link>
+        <pubDate>Sun, 19 Apr 2026 00:00:00 +0000</pubDate>
+        
+        <guid>https://1273898.github.io/p/%E8%B5%B7%E5%BA%8A%E6%B8%B8%E6%88%8F%E7%AD%96%E5%88%92%E6%A1%88-v1.0/</guid>
+        <description>&lt;h1 id=&#34;起床游戏策划案&#34;&gt;&lt;strong&gt;起床游戏策划案&lt;/strong&gt;
+&lt;/h1&gt;&lt;h2 id=&#34;1-游戏概述&#34;&gt;1. 游戏概述
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;游戏名称：&lt;/strong&gt; 起床（GET UP！）&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;游戏类型：&lt;/strong&gt; AI 原生的生成式回合制社交派对桌游，轻量休闲游戏&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;核心受众：&lt;/strong&gt; 怀旧的00后，派对群体&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;一句话简介 (Logline)：&lt;/strong&gt; 玩家靠猜拳摇骰子赢取行动回合，必须先拿下首回合完成起床，才能在 AI 裁判的规则兜底下，解锁任何你能想到的天马行空的脑洞冒险。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;平台与引擎：&lt;/strong&gt; 微信小程序 + H5/Cocos Creator（游戏引擎，可以直接成 H5 / 微信小游戏 / 抖音小游戏）&lt;/p&gt;
+&lt;h2 id=&#34;2-核心玩法&#34;&gt;2. 核心玩法
+&lt;/h2&gt;&lt;h3 id=&#34;核心循环&#34;&gt;&lt;strong&gt;核心循环&lt;/strong&gt;
+&lt;/h3&gt;&lt;p&gt;获取行动回合 → 玩家提交自由行动指令 → LLM 完成合规判决 + 剧情生成 + 状态更新 → 对局推进&lt;/p&gt;
+&lt;h3 id=&#34;对局初始化模块&#34;&gt;对局初始化模块
+&lt;/h3&gt;&lt;p&gt;可自定义对局规则（可选）：是否允许超模设定（魔法 / 科幻 / 毁灭级操作）、是否开启道具系统、终局条件、单回合行动字数限制等（仅作参考）&lt;/p&gt;
+&lt;h3 id=&#34;回合争夺模块&#34;&gt;回合争夺模块
+&lt;/h3&gt;&lt;p&gt;获取行动回合（掷骰子/黑白配/猜拳等）【人多可以黑白配取少数人进行行动，掷骰子决定先后顺序】&lt;/p&gt;
+&lt;h3 id=&#34;核心-ai-判决与叙事模块&#34;&gt;核心 AI 判决与叙事模块
+&lt;/h3&gt;&lt;p&gt;这是整个游戏的核心，分为&lt;strong&gt;前置硬规则校验&lt;/strong&gt;和&lt;strong&gt;LLM 智能判决&lt;/strong&gt;两层，避免 AI 乱判、规则失控。&lt;/p&gt;
+&lt;h4 id=&#34;第一层前置硬规则校验优先级最高&#34;&gt;第一层：前置硬规则校验（优先级最高）
+&lt;/h4&gt;&lt;p&gt;玩家提交行动指令后，先由程序做硬规则过滤，不满足直接驳回，不消耗 LLM token：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;校验玩家是否持有行动回合，无回合直接驳回；&lt;/li&gt;
+&lt;li&gt;校验玩家&lt;code&gt;is_get_up&lt;/code&gt;状态：可以把输入框上锁，上面有个&lt;strong&gt;起床&lt;/strong&gt;按钮，只有拿到行动回合才能点击，点完后输入框解锁&lt;/li&gt;
+&lt;li&gt;对局自定义规则校验：比如本局禁止超模操作，指令包含「毁灭世界」「秒杀」等直接驳回。【检测违禁词】&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;第二层llm-智能判决与叙事&#34;&gt;第二层：LLM 智能判决与叙事
+&lt;/h4&gt;&lt;p&gt;通过前置校验后，将玩家指令、当前玩家状态、对局规则输入 LLM，完成 4 个核心动作，&lt;strong&gt;必须要求 LLM 输出结构化 JSON 格式&lt;/strong&gt;，保证后端可解析、无乱码、无自由文本溢出。&lt;/p&gt;
+&lt;p&gt;核心判决维度（写入系统 Prompt，不可更改）&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;前置状态匹配度&lt;/strong&gt;：行动是否符合玩家当前状态，比如「没出门就到商场」直接驳回，需给出前置条件；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;逻辑自洽性&lt;/strong&gt;：行动是否能自圆其说，哪怕天马行空，只要有合理的因果闭环即可通过，比如「用床头零件拼火箭」可通过，「凭空变出火箭」需驳回并给出修改建议；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;对局规则适配性&lt;/strong&gt;：是否符合本局约定的规则，是否超模；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;平衡性约束&lt;/strong&gt;：超常规行动需对应合理的代价 / 回合消耗，比如「环球旅行」需消耗 3 个回合，不能 1 个回合完成；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;叙事连贯性&lt;/strong&gt;：判决结果需承接之前的剧情，保证故事流畅不割裂。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;胜负判定目标&#34;&gt;胜负判定/目标
+&lt;/h3&gt;&lt;p&gt;可以有什么必须的动作进行结束游戏&lt;/p&gt;
+&lt;h2 id=&#34;3-游戏系统与内容&#34;&gt;3. 游戏系统与内容
+&lt;/h2&gt;&lt;h3 id=&#34;游戏系统&#34;&gt;游戏系统
+&lt;/h3&gt;&lt;p&gt;demo：聊天室风格&lt;/p&gt;
+&lt;p&gt;迭代：尽量类似圆桌会议，风格可参考十日终焉&lt;/p&gt;
+&lt;h3 id=&#34;游戏内容&#34;&gt;游戏内容
+&lt;/h3&gt;&lt;p&gt;达成结局后由ai进行故事内容的生成，将玩家的行动逻辑串联成一个故事，可以附上对不同玩家各个风格的评价。&lt;/p&gt;
+&lt;h2 id=&#34;4-美术与视听风格&#34;&gt;4. 美术与视听风格
+&lt;/h2&gt;&lt;p&gt;确立游戏的感官体验基调。&lt;/p&gt;
+&lt;p&gt;**视觉风格：**2D/3D demo先2D 界面流畅简洁，可以富有活力&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;UI 交互：&lt;/strong&gt; 聊天室风格&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;音效与音乐：&lt;/strong&gt; （背景音乐的氛围情绪、关键操作的反馈音效，如点击、得分、失败等。）&lt;strong&gt;暂无&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&#34;5-技术架构选型&#34;&gt;5. 技术架构选型
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;前端&lt;/strong&gt;：Vue3 + Vite&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;后端&lt;/strong&gt;：Python FastAPI&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;AI 大模型&lt;/strong&gt;：豆包大模型 API&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;核心 Prompt&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;例子：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;# 角色定位 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;你是《起床大冒险》游戏的专属裁判与叙事官，严格遵守游戏底层铁则，公平公正完成行动判决，同时生成生动有趣的剧情内容，兼顾玩家的脑洞自由与游戏规则平衡。 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;# 游戏底层铁则（优先级最高，绝对不可突破）
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;1. 玩家的第一个行动回合，只能且必须用于完成「起床」动作，未完成起床的玩家，所有非起床行动必须驳回，无任何例外。 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;2. 1个行动回合仅可执行1个完整行动，复杂行动可拆分回合，或标注所需额外回合数。 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;3. 判决核心原则：行动无需符合现实物理规则，但必须逻辑自洽、满足玩家当前前置状态、符合本局规则，不得无理由驳回玩家的脑洞指令。 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;4. 所有内容必须符合中国法律法规，杜绝低俗、暴力、违规内容，出现违规内容直接block。
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;# 本局基础信息 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;- 对局模式：单人剧情模式 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;- 玩家当前状态：{{player_status}} 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;- 本局自定义规则：{{game_rules}} 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;- 玩家当前持有回合数：{{round_num}} 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;- 玩家本次行动指令：{{player_action}} 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;# 输出要求 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;1. 必须严格按照下方固定的JSON格式输出，不得添加任何额外的文本、注释、markdown格式，确保JSON可被正常解析。 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;2. judge_result只能是pass或reject，不得出现其他值。 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;3. 驳回时，judge_reason必须给出明确、可落地的修改建议，不得笼统拒绝。 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;4. story_output需贴合玩家行动，生成有画面感、有叙事性的文本，字数控制在50-200字。
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;5. status_update仅返回本次行动变动的玩家状态字段，无变动则返回空对象。
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;# 固定输出格式 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;{  
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &amp;#34;judge_result&amp;#34;: &amp;#34;&amp;#34;,  
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &amp;#34;judge_reason&amp;#34;: &amp;#34;&amp;#34;,  
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &amp;#34;story_output&amp;#34;: &amp;#34;&amp;#34;,  
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &amp;#34;status_update&amp;#34;: {},  
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &amp;#34;event_tip&amp;#34;: &amp;#34;&amp;#34;,  
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &amp;#34;safe_check&amp;#34;: &amp;#34;&amp;#34; 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;特色技术接入&lt;/strong&gt;：（是否需要接入特殊的能力？比如通过大语言模型或 LangChain4j 驱动的 NPC 对话，或是基于 RAG 的动态剧情生成？）&lt;/p&gt;
+&lt;h2 id=&#34;6-商业化与推广&#34;&gt;6. 商业化与推广
+&lt;/h2&gt;&lt;p&gt;暂不考虑&lt;/p&gt;
+&lt;h2 id=&#34;7-开发计划&#34;&gt;7. 开发计划
+&lt;/h2&gt;&lt;p&gt;MVP 阶段：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;只保留最核心的玩法，其他花里胡哨的全都砍掉&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;你这个游戏的 MVP 只需要做到这些：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;玩家可以&lt;strong&gt;摇骰子 / 猜拳&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;赢了获得&lt;strong&gt;行动回合&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;输入一句话行动&lt;/li&gt;
+&lt;li&gt;AI 判断合不合理，并给出剧情&lt;/li&gt;
+&lt;li&gt;记录你有没有&lt;strong&gt;起床&lt;/strong&gt;这个状态&lt;/li&gt;
+&lt;li&gt;能一直玩下去&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>
